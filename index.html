@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<!--
+Copyright 2017 Google Inc.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Prototype Made By Kiju Dev.
+URL : https://2kiju.tistory.com/
+
+Reference By https://github.com/samdutton/simpl/blob/
+https://github.com/samdutton/simpl/blob/gh-pages/getusermedia/sources/js/main.js
+-->
+
+<html lang="en">
+  <head>
+  <script>
+    //  philipwalton.com/articles/the-google-analytics-setup-i-use-on-every-site-i-build
+    window.ga = window.ga || function() {
+      (ga.q = ga.q || []).push(arguments);
+    };
+    ga('create', 'UA-33848682-1', 'auto');
+    ga('set', 'transport', 'beacon');
+    ga('send', 'pageview');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Simplest possible examples of HTML, CSS and JavaScript.">
+  <!-- <meta name="author" content="//samdutton.com"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta itemprop="name" content="simpl.info: simplest possible examples of HTML, CSS and JavaScript">
+  <link rel='stylesheet' type='text/css' href='./css/styles.css'>
+  <meta itemprop="image" content="/images/icons/icon192.png">
+  <meta id="theme-color" name="theme-color" content="#fff">
+  <base target="_blank">
+  <title>지현테크놀로지</title>
+  </head>
+  <body>
+    <h1 id ="main">
+      지현테크놀로지 파각 혈란 검출시스템
+    </h1>
+  <div id="container">
+    <div class="select">
+      <label for="audioSource">Audio source: </label><select id="audioSource"></select>
+    </div>
+
+    <div class="select">
+      <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    </div>
+    <!-- <button onclick="snapshot()"> snapshot</button> -->
+    <img id="sample" src="">
+    <canvas style="display:none;"></canvas>
+    <table id="main-table">
+      <tbody>
+        <tr>
+          <td>
+            <video autoplay muted playsinline></video>
+          </td>
+          <td>
+            <div class="snapshotContainer">
+              <div class="vr"></div>
+              <div class="vr"></div>
+              <img class = "snapshots" src = "">
+              <div class="hr"></div>
+              <div class="hr"></div>
+            </div>
+          </td>
+          <td rowspan="2" class="padding-left">
+            <h2>
+              이상란 <span id="result">0</span>
+            </h2>
+            <ul>
+              <li>파란 <span id="breakEgg">0</span></li>
+              <li>혈란 <span id="bloodEgg">0</span></li>
+              <li>오염란 <span id="pollutionEgg">0</span></li>
+              <li>먹란 <span id="blackEgg">0</span></li>
+              <li>공란 <span id="emptyEgg">0</span></li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table style="margin:auto;">
+              <tr>
+                <td></td>
+                <th>솔레노이드 간격<br>(분할기판)</th>
+                <th>솔레노이드<br>시간(초)</th>
+                <td><button>EEPROM</button></td>
+              </tr>
+              <tr>
+                <th>로드셀</th>
+                <td><input type="number" min="0" max="512" class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+              <tr>
+                <th>파란</th>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+              <tr>
+                <th>혈란</th>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+              <tr>
+                <th>오염란</th>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+              <tr>
+                <th>먹란</th>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+              <tr>
+                <th>공란</th>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><input type="number" min="0" max="512"class="input-width"></td>
+                <td><button>설정</button></td>
+              </tr>
+            </table>
+
+          </td>
+          <td>
+            <div class="snapshotContainer">
+              <div class="vr"></div>
+              <div class="vr"></div>
+              <img class = "snapshots" src = "">
+              <div class="hr"></div>
+              <div class="hr"></div>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <script async src="js/media.js"></script>
+    <script async src="js/event.js"></script>
+  </div>
+
+  </body>
+</html>
