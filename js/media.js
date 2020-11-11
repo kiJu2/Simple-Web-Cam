@@ -60,7 +60,7 @@ function getStream() {
 }
 
 function gotStream(stream) {
-  window.stream = stream; // make stream available to console
+  window.stream = stream; 
   audioSelect.selectedIndex = [...audioSelect.options].
     findIndex(option => option.text === stream.getAudioTracks()[0].label);
   videoSelect.selectedIndex = [...videoSelect.options].
@@ -69,15 +69,13 @@ function gotStream(stream) {
 }
 
 // Not showing vendor prefixes or code that works cross-browser.
-// Snap shot
 var video = document.querySelector('video');
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 var localMediaStream = null;
+var steelShotData = null;
 
-var snapshotDatas = new Array();
-
-function snapshot() {
+function captureSteelShot() {
   if (localMediaStream) {
     const videoRec = video.getBoundingClientRect()
 
@@ -85,86 +83,27 @@ function snapshot() {
     canvas.height = videoRec.height;
 
     ctx.drawImage(video, 0, 0);
-    // ctx.drawImage(video, 0, 0, videoRec.width, videoRec.height);
-    // "image/webp" works in Chrome.
-    // Other browsers will fall back to image/png.
-    // document.querySelector('img').src = ;
-    snapshotDatas.unshift(canvas.toDataURL('image/webp'))
-  }
-}
-function renderSnapshots(){
-  try{
-    const snapshots = document.getElementsByClassName('snapshots');
-
-    snapshots[0].src = snapshotDatas[0];
-    if(snapshotDatas.length > 1){
-      snapshots[1].src = snapshotDatas[1];
-    }
-    else {
-      throw 'OUTOFINDEX'
-    }
-  }
-  catch(err){
-    if(err.status == 'OUTOFINDEX'){
-    }
+    if(isChrome)
+      steelShotData = canvas.toDataURL('image/webp')
+    else
+      steelShotData = canvas.toDataURL('image/png')
   }
 }
 
-function drawGrid(ratio){
-  const vrs = Array.from(document.getElementsByClassName("vr"));
-  const hrs = Array.from(document.getElementsByClassName("hr"));
-
-  const videoRec = video.getBoundingClientRect()
-  const leftPx = Math.round(videoRec.width/ratio);
-  const bottomPx = Math.round(videoRec.height/ratio);
-
-  const GRIDNUM = ratio - 1;
-
-  var iter = 1
-  vrs.map((item, key) => {
-    if(keyHitCount == 1 && key + 1 > GRIDNUM){
-    }
-    else{
-      const left = iter * leftPx;
-      const style = `
-      margin-left:${left.toString()}px;
-      height:${videoRec.height.toString()}px;
-      `
-  
-      item.setAttribute('style', style);
-      iter += 1;
-      if((key + 1) % GRIDNUM == 0)
-        iter = 1}
-    
-  })
-
-  iter = 1
-  hrs.map((item, key) => {
-    if(keyHitCount == 1 && key + 1 > GRIDNUM){
-    }
-    else{
-      const bottom = iter * bottomPx;
-      const style = `
-      bottom:${bottom.toString()}px;
-      width:${videoRec.width.toString()}px;
-      `
-
-      item.setAttribute('style', style);
-      iter += 1;
-      if((key + 1) % GRIDNUM == 0)
-        iter = 1
-    }
-  })
+function renderImg(){
+  const tagIMG = document.getElementById("steel-shot")
+  console.log(tagIMG);
+  tagIMG.src = steelShotData;
 }
 
-function errorCallback(){
-  console.log("Fail getUserMedia");
-}
-
-navigator.getUserMedia({video: true}, function(stream) {
+navigator.mediaDevices.getUserMedia({video:true})
+.then(function(stream) {
   video.srcObject=stream;
   localMediaStream = stream;
-}, errorCallback);
+})
+.catch(function(err) {
+  console.log("Fail getUserMedia");
+});
 
 function handleError(error) {
   console.error('Error: ', error);
