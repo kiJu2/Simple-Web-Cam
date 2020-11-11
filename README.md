@@ -4,3 +4,6 @@ display real-time images on the web and capture still shots.
 
 Press the Capture button to update the picture.
 Works seamlessly in safari, chrome, and firefox browser environments.
+
+
+![screenshot_20171221-151714](https://user-images.githubusercontent.com/50073258/98783619-35d9c000-243d-11eb-9061-a2e9836ebe4c.png)
